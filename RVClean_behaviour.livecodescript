@@ -158,29 +158,14 @@ local sRegexp, \
       sAu_Major_Sep, \
       sAu_Prefix, \
       sAu_Suffix
-
-
-
-on init_SunnYrex
-   if the environment is "development" then
-      put specialFolderPath("resources") & "/sunnYrexLibrary.livecode" into tPath
-      --      put "sunnYrexLibrary" into tPath
-   else
-      put specialFolderPath("resources") & "/sunnYrexLibrary.livecode" into tPath
-      start using stack tPath
-   end if
-   start using stack tPath
-   sunnYrexRegister "kaveh@rivervalleytechnologies.com", 28140670
-   put true into isStarted
-end init_SunnYrex
-
---on preopenstack
---   init_SunnYrex
---end preopenstack
+      
+      
+      
+-- Comment added for test
+-- Kaveh's comments for testing
 
 on openstack
    put the millisecs into ms
-   init_SunnYrex
    if the short name of this stack is not "RVClean" then
       -- must be a substack
       exit openstack
@@ -4409,38 +4394,25 @@ on _generate_option
    put sSurnames into tPart2
    --put tSurnames into tPart2
    put the number of lines of tPart2 into tlines
-   get the label of btn "Journal"
-   if it is "FLM" then
-      if tLines = 3 then
-         replace return with "," & return in tPart2
-         put "and" & return before line -1 of tPart2
-         put "[" & tPart1 & tPart2 & "]" into sOption
-      else
-         --put empty into tPart2
-         put "[" & tPart1 & tPart2 & "]" into sOption
-      end if
-   else if it is "JFQ" then
-      
-      if tLines > 2 then
-         replace return with "," & return in tPart2
-         put "and" & return before line -1 of tPart2
-         put "[" & tPart1 & tPart2 & "]" into sOption
-         
-      else if tLines = 2 then
-         put "and" & return before line -1 of tPart2
-         --put "[" & tPart1 & tPart2 & "]" into sOption
-         put "[" & tPart1 & "]" into sOption
-      else
-         put empty into tPart2
-         put "[" & tPart1 & tPart2 & "]" into sOption
-      end if
-   end if
-      -- put together
-      -- e.g. [Smith \etal(2015)Smith, Jones, and Williams]
+   if tLines > 2 then
+      replace return with "," & return in tPart2
+      put "and" & return before line -1 of tPart2
+      put "[" & tPart1 & tPart2 & "]" into sOption
+    
+   else if tLines = 2 then
+      put "and" & return before line -1 of tPart2
       --put "[" & tPart1 & tPart2 & "]" into sOption
-      put _convert_return_to_space(sOption) into sOption
-      put _multiple_spaces_to_single_space(sOption) into sOption
-   end _generate_option
+      put "[" & tPart1 & "]" into sOption
+   else
+      put empty into tPart2
+      put "[" & tPart1 & tPart2 & "]" into sOption
+   end if
+   -- put together
+   -- e.g. [Smith \etal(2015)Smith, Jones, and Williams]
+   --put "[" & tPart1 & tPart2 & "]" into sOption
+   put _convert_return_to_space(sOption) into sOption
+   put _multiple_spaces_to_single_space(sOption) into sOption
+end _generate_option
 
   on _generate_key
    -- get e.g. Smith \etal(2015) then modify to get Key
