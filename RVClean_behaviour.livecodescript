@@ -6,6 +6,7 @@ global \
       to_highlight, \
       highlight_group, \
       \
+      --COmments on 13.11.19
       search_category, \
       separator, \
       citation_style, \
