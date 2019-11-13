@@ -1,4 +1,7 @@
-﻿script "RVClean_behaviour"
+
+I have changed the first line
+
+script "RVClean_behaviour"
 global \
       gTextStart, \
       gTextEnd, \
